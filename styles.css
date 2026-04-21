@@ -6,6 +6,7 @@
   --muted: #6f6f69;
   --border: rgba(24, 24, 23, 0.08);
   --shadow: 0 18px 40px rgba(24, 24, 23, 0.06);
+  --home: #96a3a0;
   --work: #d97745;
   --sleep: #7c9cbc;
   --rest: #90aa67;
@@ -186,6 +187,10 @@ h1 {
   color: var(--work);
 }
 
+.legend-item.home {
+  color: var(--home);
+}
+
 .legend-item.sleep {
   color: var(--sleep);
 }
@@ -312,6 +317,14 @@ h1 {
 
 .status-work .status-badge {
   color: #9b4f28;
+}
+
+.status-home {
+  background: rgba(150, 163, 160, 0.16);
+}
+
+.status-home .status-badge {
+  color: #55615f;
 }
 
 .status-sleep {

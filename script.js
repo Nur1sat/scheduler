@@ -4,42 +4,42 @@ const weekdayLabels = ["Дс", "Сс", "Ср", "Бс", "Жм", "Сб", "Жс"];
 
 const mamaCycle = [
   {
-    key: "sleep",
-    badge: "Ұйқы",
-    description: "Таңда ұйықтайды",
+    key: "home",
+    badge: "Үйде",
+    description: "",
   },
   {
-    key: "rest",
-    badge: "Демалыс",
-    description: "Үйде",
+    key: "home",
+    badge: "Үйде",
+    description: "",
   },
   {
     key: "work",
     badge: "Жұмыс",
-    description: "Түнгі ауысым",
+    description: "",
   },
 ];
 
 const papaCycle = [
   {
-    key: "sleep",
-    badge: "Ұйқы",
-    description: "Таңда ұйықтайды",
+    key: "home",
+    badge: "Үйде",
+    description: "",
   },
   {
-    key: "rest",
-    badge: "Демалыс",
-    description: "Толық демалыс",
+    key: "home",
+    badge: "Үйде",
+    description: "",
   },
   {
     key: "day",
     badge: "Күндіз",
-    description: "Күндізгі ауысым",
+    description: "",
   },
   {
     key: "night",
     badge: "Түн",
-    description: "Түнгі ауысым",
+    description: "",
   },
 ];
 
@@ -134,12 +134,15 @@ function createDayCell(date, state) {
   badge.className = "status-badge";
   badge.textContent = state.badge;
 
-  const copy = document.createElement("div");
-  copy.className = "status-copy";
-  copy.textContent = state.description;
-
   top.append(dayInfo, badge);
-  cell.append(top, copy);
+  cell.append(top);
+
+  if (state.description) {
+    const copy = document.createElement("div");
+    copy.className = "status-copy";
+    copy.textContent = state.description;
+    cell.append(copy);
+  }
 
   return cell;
 }
