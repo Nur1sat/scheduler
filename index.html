@@ -21,11 +21,11 @@
           <div class="today-statuses">
             <div class="today-card mama-accent">
               <span>mama</span>
-              <strong id="todayMama"></strong>
+              <div id="todayMama" class="today-state" aria-hidden="true"></div>
             </div>
             <div class="today-card papa-accent">
               <span>papa</span>
-              <strong id="todayPapa"></strong>
+              <div id="todayPapa" class="today-state" aria-hidden="true"></div>
             </div>
           </div>
         </div>
@@ -37,13 +37,6 @@
         <button id="nextMonth" type="button" aria-label="Келесі ай">→</button>
       </section>
 
-      <section class="legend" aria-label="Кесте белгілері">
-        <div class="legend-item home">Үйде</div>
-        <div class="legend-item work">Жұмыс</div>
-        <div class="legend-item day">Күндіз</div>
-        <div class="legend-item night">Түн</div>
-      </section>
-
       <main class="calendar-layout">
         <section class="calendar-card">
           <div class="calendar-header">
@@ -51,7 +44,6 @@
               <p class="calendar-label">mama</p>
               <h2>mama</h2>
             </div>
-            <p class="cycle-note">Жұмыс → Үйде → Үйде</p>
           </div>
           <div class="weekday-row" id="mamaWeekdays"></div>
           <div class="calendar-grid" id="mamaCalendar"></div>
@@ -63,7 +55,6 @@
               <p class="calendar-label">papa</p>
               <h2>papa</h2>
             </div>
-            <p class="cycle-note">Күндіз → Түн → Үйде → Үйде</p>
           </div>
           <div class="weekday-row" id="papaWeekdays"></div>
           <div class="calendar-grid" id="papaCalendar"></div>

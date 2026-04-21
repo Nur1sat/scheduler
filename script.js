@@ -110,6 +110,7 @@ function createEmptyCell() {
 function createDayCell(date, state) {
   const cell = document.createElement("article");
   cell.className = `day-cell status-${state.key}`;
+  cell.setAttribute("aria-label", `${date.getDate()} ${state.badge}`);
 
   if (isSameDay(date, currentDate)) {
     cell.classList.add("is-today");
@@ -130,11 +131,11 @@ function createDayCell(date, state) {
 
   dayInfo.append(dayNumber, dayName);
 
-  const badge = document.createElement("div");
-  badge.className = "status-badge";
-  badge.textContent = state.badge;
+  const indicator = document.createElement("div");
+  indicator.className = `status-indicator state-${state.key}`;
+  indicator.setAttribute("aria-hidden", "true");
 
-  top.append(dayInfo, badge);
+  top.append(dayInfo, indicator);
   cell.append(top);
 
   if (state.description) {
@@ -173,8 +174,15 @@ function renderHeader() {
   }).format(visibleMonth);
 
   todayDate.textContent = formatHeaderDate(currentDate);
-  todayMama.textContent = getCycleState(currentDate, mamaCycle).badge;
-  todayPapa.textContent = getCycleState(currentDate, papaCycle).badge;
+  const mamaState = getCycleState(currentDate, mamaCycle);
+  const papaState = getCycleState(currentDate, papaCycle);
+
+  todayMama.className = `today-state state-${mamaState.key}`;
+  todayPapa.className = `today-state state-${papaState.key}`;
+  todayMama.setAttribute("aria-label", mamaState.badge);
+  todayPapa.setAttribute("aria-label", papaState.badge);
+  todayMama.title = mamaState.badge;
+  todayPapa.title = papaState.badge;
 }
 
 function render() {
