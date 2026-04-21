@@ -1,51 +1,45 @@
-const referenceDate = new Date(2026, 3, 21);
-const weekdayLabels = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const anchorDate = new Date(2026, 3, 21);
+const currentDate = new Date();
+const weekdayLabels = ["Дс", "Сс", "Ср", "Бс", "Жм", "Сб", "Жс"];
 
 const mamaCycle = [
   {
     key: "sleep",
-    badge: "Sleep Morning",
-    short: "Rest",
-    description: "Resting today, sleeping in the morning after night shift.",
+    badge: "Ұйқы",
+    description: "Таңда ұйықтайды",
   },
   {
     key: "rest",
-    badge: "Rest Day",
-    short: "Rest",
-    description: "Full day at home to relax.",
+    badge: "Демалыс",
+    description: "Үйде",
   },
   {
     key: "work",
-    badge: "Night Work",
-    short: "Work",
-    description: "Night shift at work.",
+    badge: "Жұмыс",
+    description: "Түнгі ауысым",
   },
 ];
 
 const papaCycle = [
   {
     key: "sleep",
-    badge: "Sleep Morning",
-    short: "Rest",
-    description: "Resting today, sleeping in the morning after night shift.",
+    badge: "Ұйқы",
+    description: "Таңда ұйықтайды",
   },
   {
     key: "rest",
-    badge: "Rest Day",
-    short: "Rest",
-    description: "Full day demalys at home.",
+    badge: "Демалыс",
+    description: "Толық демалыс",
   },
   {
     key: "day",
-    badge: "Day Shift",
-    short: "Den",
-    description: "Day shift at work.",
+    badge: "Күндіз",
+    description: "Күндізгі ауысым",
   },
   {
     key: "night",
-    badge: "Night Shift",
-    short: "Noch",
-    description: "Night shift at work.",
+    badge: "Түн",
+    description: "Түнгі ауысым",
   },
 ];
 
@@ -58,7 +52,7 @@ const papaCalendar = document.getElementById("papaCalendar");
 const mamaWeekdays = document.getElementById("mamaWeekdays");
 const papaWeekdays = document.getElementById("papaWeekdays");
 
-let visibleMonth = new Date(referenceDate.getFullYear(), referenceDate.getMonth(), 1);
+let visibleMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
 
 function normalizeDate(date) {
   return new Date(date.getFullYear(), date.getMonth(), date.getDate());
@@ -66,7 +60,7 @@ function normalizeDate(date) {
 
 function getDayOffset(date) {
   const dayMs = 24 * 60 * 60 * 1000;
-  return Math.round((normalizeDate(date) - referenceDate) / dayMs);
+  return Math.round((normalizeDate(date) - anchorDate) / dayMs);
 }
 
 function getCycleState(date, cycle) {
@@ -84,12 +78,16 @@ function isSameDay(a, b) {
 }
 
 function formatHeaderDate(date) {
-  return new Intl.DateTimeFormat("en-US", {
+  return new Intl.DateTimeFormat("kk-KZ", {
     weekday: "long",
     month: "long",
     day: "numeric",
     year: "numeric",
   }).format(date);
+}
+
+function getMondayFirstIndex(date) {
+  return (date.getDay() + 6) % 7;
 }
 
 function renderWeekdays(container) {
@@ -113,7 +111,7 @@ function createDayCell(date, state) {
   const cell = document.createElement("article");
   cell.className = `day-cell status-${state.key}`;
 
-  if (isSameDay(date, referenceDate)) {
+  if (isSameDay(date, currentDate)) {
     cell.classList.add("is-today");
   }
 
@@ -128,7 +126,7 @@ function createDayCell(date, state) {
 
   const dayName = document.createElement("div");
   dayName.className = "day-name";
-  dayName.textContent = weekdayLabels[date.getDay()];
+  dayName.textContent = weekdayLabels[getMondayFirstIndex(date)];
 
   dayInfo.append(dayNumber, dayName);
 
@@ -154,7 +152,7 @@ function renderCalendar(container, cycle, monthDate) {
   const firstDay = new Date(year, month, 1);
   const lastDay = new Date(year, month + 1, 0);
 
-  for (let i = 0; i < firstDay.getDay(); i += 1) {
+  for (let i = 0; i < getMondayFirstIndex(firstDay); i += 1) {
     container.appendChild(createEmptyCell());
   }
 
@@ -166,14 +164,14 @@ function renderCalendar(container, cycle, monthDate) {
 }
 
 function renderHeader() {
-  monthTitle.textContent = new Intl.DateTimeFormat("en-US", {
+  monthTitle.textContent = new Intl.DateTimeFormat("kk-KZ", {
     month: "long",
     year: "numeric",
   }).format(visibleMonth);
 
-  todayDate.textContent = formatHeaderDate(referenceDate);
-  todayMama.textContent = getCycleState(referenceDate, mamaCycle).description;
-  todayPapa.textContent = getCycleState(referenceDate, papaCycle).description;
+  todayDate.textContent = formatHeaderDate(currentDate);
+  todayMama.textContent = getCycleState(currentDate, mamaCycle).badge;
+  todayPapa.textContent = getCycleState(currentDate, papaCycle).badge;
 }
 
 function render() {
