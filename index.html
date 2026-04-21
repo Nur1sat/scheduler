@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mama Papa Schedule</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Family Shift Calendar</p>
+          <h1>Mama & Papa Schedule</h1>
+          <p class="hero-copy">
+            Built from the rotation anchored on April 21, 2026. On that date,
+            both are resting and sleeping in the morning after the previous
+            night shift.
+          </p>
+        </div>
+
+        <div class="today-panel">
+          <p class="today-label">Reference Day</p>
+          <h2 id="todayDate"></h2>
+          <div class="today-statuses">
+            <div class="today-card mama-accent">
+              <span>Mama</span>
+              <strong id="todayMama"></strong>
+            </div>
+            <div class="today-card papa-accent">
+              <span>Papa</span>
+              <strong id="todayPapa"></strong>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="controls" aria-label="Calendar controls">
+        <button id="prevMonth" type="button">Previous</button>
+        <div class="month-title" id="monthTitle"></div>
+        <button id="nextMonth" type="button">Next</button>
+      </section>
+
+      <section class="legend" aria-label="Schedule legend">
+        <div class="legend-item work">Work</div>
+        <div class="legend-item sleep">Rest + sleep in the morning</div>
+        <div class="legend-item rest">Rest full day</div>
+        <div class="legend-item day">Day shift</div>
+        <div class="legend-item night">Night shift</div>
+      </section>
+
+      <main class="calendar-layout">
+        <section class="calendar-card">
+          <div class="calendar-header">
+            <div>
+              <p class="calendar-label">mama</p>
+              <h2>Night Shift Rotation</h2>
+            </div>
+            <p class="cycle-note">Work → Sleep morning → Rest full day</p>
+          </div>
+          <div class="weekday-row" id="mamaWeekdays"></div>
+          <div class="calendar-grid" id="mamaCalendar"></div>
+        </section>
+
+        <section class="calendar-card">
+          <div class="calendar-header">
+            <div>
+              <p class="calendar-label">papa</p>
+              <h2>Factory Rotation</h2>
+            </div>
+            <p class="cycle-note">
+              Day shift → Night shift → Sleep morning → Rest full day
+            </p>
+          </div>
+          <div class="weekday-row" id="papaWeekdays"></div>
+          <div class="calendar-grid" id="papaCalendar"></div>
+        </section>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
